@@ -494,7 +494,11 @@ class CalendarDelegate : PluginRegistry.RequestPermissionsResultListener {
         values.put(Events.CALENDAR_ID, calendarId)
         values.put(Events.DURATION, duration)
         values.put(Events.AVAILABILITY, getAvailability(event.availability))
-        values.put(Events.STATUS, getEventStatus(event.eventStatus))
+
+        val status = getEventStatus(event.eventStatus)
+        if (status != null) {
+            values.put(Events.STATUS, status)
+        }
 
         if (event.recurrenceRule != null) {
             val recurrenceRuleParams = buildRecurrenceRuleParams(event.recurrenceRule!!)
